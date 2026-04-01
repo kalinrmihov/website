@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dump-yard inventory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="project-page">
+
+    <header class="site-header">
+        <nav class="main-nav">
+            <a href="index.html">home</a>
+            <a href="gallery.html" class="active">gallery</a>
+            <a href="about.html">bio</a>
+        </nav>
+    </header>
+
+    <main class="project-container">
+        <section class="project-visuals">
+            <img src="images/project-inventory/project-inventory-1.webp" alt="Dump-yard inventory, photo documentation, 2022">
+            <img src="images/project-inventory/project-inventory-2.webp" alt="Dump-yard inventory, photo documentation, 2022">
+            <img src="images/project-inventory/project-inventory-3.webp" alt="Dump-yard inventory, photo documentation, 2022">
+            <img src="images/project-inventory/project-inventory-4.webp" alt="Dump-yard inventory, photo documentation, 2022">
+            <img src="images/project-inventory/project-inventory-5.webp" alt="Dump-yard inventory, photo documentation, 2022">
+            <img src="images/project-inventory/project-inventory-6.webp" alt="Dump-yard inventory, photo documentation, 2022">
+            <img src="images/project-inventory/project-inventory-7.webp" alt="Dump-yard inventory, aerial documentation, 2022">
+            <img src="images/project-inventory/project-inventory-8.webp" alt="Dump-yard inventory, aerial documentation, 2022">
+            <img src="images/project-inventory/project-inventory-9.webp" alt="Dump-yard inventory, aerial documentation, 2022">
+            <img src="images/project-inventory/project-inventory-10.webp" alt="Dump-yard inventory, aerial documentation, 2022">
+      
+        </section>
+
+        <section class="project-header">
+            <div class="sticky-wrapper">
+                <h1 class="project-title">Dump-yard inventory</h1>
+                <p class="project-meta">Site-specific installation, Found objects, lime, 12x16 meters/ 2022 / Presented at Youth Culture Center, Vratsa, Bulgaria.</p>
+                
+                <div class="project-description">
+                    <p>
+Kalin Mihov's installation Dump yard Inventory systematizes pictorial compositions of various materials, textures and colors, created on the site of an unregulated landfill near the village of Gorno Pestene located in North-west region of Bulgaria - the poorest region in Europe. The individual components and the interrelationships accumulated over time between them are carefully classified into a new, non-place-specific structural unity, essentially nothing is added and nothing is taken away from the place, only the nature and function of the objects is changed.
+                    </p>             
+                    <p>
+In the form of a happening, with the support of residents of the village , the landfill is sorted into a table with an area of 192 square meters, in which each cell contains a different type of found waste. Focusing in this way on the chronic problems for peripheral areas in Bulgaria - the lack of good infrastructure and logistics for regular garbage collection, limited or absent access to the possibility of separate collection of waste and its recycling -, "Landfill Inventory" also refers to more central questions for the contemporary man: over-consumption, the human footprint on nature, waste management and climate change.
+                    </p>
+                    <p>
+                        Bird's-eye documentation summarizes the author's intervention in the space.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="project-pagination">
+    <div id="pagination-container" class="pagination-container">
+        </div>
+</div>
+<div class="nav-footer-spacer"></div>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <a href="https://instagram.com/sharo.kalin/" target="_blank" class="instagram-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+
+        <span class="email-text">kalin.r.mihov@gmail.com</span>
+    </div>
+</footer>
+
+    <div id="lightbox" class="lightbox">
+        <div id="lightbox-counter" class="lightbox-counter"></div>
+
+        <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+        <a class="next" onclick="changeImage(1)">&#10095;</a>
+        
+        <div class="lightbox-wrapper">
+            <img class="lightbox-content" id="lightbox-img">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. ЛОГИКА НА СКРИВАНЕ НА МЕНЮТО (HEADER) ---
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector("header");
+
+        window.addEventListener("scroll", () => {
+            if (lastScrollY < window.scrollY && window.scrollY > 100) {
+                header.classList.add("header--hidden");
+            } else {
+                header.classList.remove("header--hidden");
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // --- 2. LIGHTBOX ЕЛЕМЕНТИ ---
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const lightboxCaption = document.getElementById("lightbox-caption");
+        const lightboxCounter = document.getElementById("lightbox-counter");
+        const projectImages = document.querySelectorAll(".project-visuals img");
+
+        let currentImageIndex = 0;
+
+        // 3. ФУНКЦИЯ ЗА ОБНОВЯВАНЕ (Снимка + Текст + Брояч)
+        function updateLightboxInfo() {
+            const currentImg = projectImages[currentImageIndex];
+            lightboxImg.src = currentImg.src;
+            lightboxCaption.innerText = currentImg.alt || ""; 
+            lightboxCounter.innerText = `${currentImageIndex + 1} / ${projectImages.length}`;
+        }
+
+        // 4. ОТВАРЯНЕ
+        function openLightbox(index) {
+            currentImageIndex = index;
+            lightbox.style.display = "flex";
+            updateLightboxInfo();
+            document.body.style.overflow = "hidden";
+        }
+
+        projectImages.forEach((img, index) => {
+            img.addEventListener("click", () => openLightbox(index));
+        });
+
+        // 5. ЗАТВАРЯНЕ
+        function closeLightbox() {
+            lightbox.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        // 6. СМЯНА НА СНИМКАТА
+        function changeImage(delta) {
+            currentImageIndex += delta;
+            if (currentImageIndex >= projectImages.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = projectImages.length - 1;
+            }
+            updateLightboxInfo();
+        }
+
+        // 7. СЪБИТИЯ
+        lightboxImg.addEventListener("click", (e) => {
+            e.stopPropagation(); 
+            changeImage(1);
+        });
+
+        lightbox.addEventListener("click", (e) => {
+            if (e.target !== lightboxImg && e.target.className !== 'prev' && e.target.className !== 'next') {
+                closeLightbox();
+            }
+        });
+
+        window.addEventListener("keydown", (e) => {
+            if (lightbox.style.display === "flex") {
+                if (e.key === "ArrowLeft") changeImage(-1);
+                else if (e.key === "ArrowRight") changeImage(1);
+                else if (e.key === "Escape") closeLightbox();
+            }
+        });
+
+
+
+        // Описваш проектите в реда, в който искаш да се появяват
+const allProjects = [
+    { name: "Do you really self-care?", url: "project-selfcare.html" },
+    { name: "Treadmill series", url: "project-treadmill.html" },
+    { name: "Tourist go home", url: "project-tourist.html" },
+    { name: "I am the wild strawberry meadow", url: "project-strawberry.html" },
+    { name: "Riverman", url: "project-riverman.html" },
+    { name: "Pillow work", url: "project-pillowwork.html" },
+    { name: "Dump yard inventory", url: "project-inventory.html" }
+
+
+
+    // Лесно добавяш нови тук
+];
+
+function setupProjectPagination() {
+    const container = document.getElementById("pagination-container");
+    const currentFile = window.location.pathname.split("/").pop(); // Взима името на текущия файл
+    
+    // Намираме индекса на текущия проект в списъка
+    const currentIndex = allProjects.findIndex(p => p.url === currentFile);
+    
+    if (currentIndex === -1) return; // Ако проектът не е в списъка, не прави нищо
+
+    let paginationHTML = "";
+
+    // 1. Проверка за ПРЕДИШЕН проект
+    if (currentIndex > 0) {
+        const prev = allProjects[currentIndex - 1];
+        paginationHTML += `
+            <div class="pagination-item prev-project">
+                <a href="${prev.url}">
+                    <span class="nav-arrow">&#10094;</span>
+                    <span class="project-name">${prev.name}</span>
+                </a>
+            </div>`;
+    } else {
+        // Празно място, за да остане следващият вдясно
+        paginationHTML += `<div></div>`; 
+    }
+
+    // 2. Проверка за СЛЕДВАЩ проект
+    if (currentIndex < allProjects.length - 1) {
+        const next = allProjects[currentIndex + 1];
+        paginationHTML += `
+            <div class="pagination-item next-project">
+                <a href="${next.url}">
+                    <span class="project-name">${next.name}</span>
+                    <span class="nav-arrow">&#10095;</span>
+                </a>
+            </div>`;
+    }
+
+    container.innerHTML = paginationHTML;
+}
+
+window.addEventListener('scroll', function() {
+    const overlay = document.getElementById('video-overlay');
+    const video = document.getElementById('intro-video');
+    if (overlay && video) {
+        const scrollPos = window.scrollY;
+        let opacity = 1 - (scrollPos / 30);
+        
+        if (opacity < 0) opacity = 0;
+        if (opacity > 1) opacity = 1;
+
+        overlay.style.opacity = opacity;
+
+        if (opacity <= 0) {
+            overlay.style.visibility = 'hidden';
+            video.pause();
+        } else {
+            overlay.style.visibility = 'visible';
+            if (video.paused) video.play();
+        }
+    }
+});
+const overlayEl = document.getElementById('video-overlay');
+if (overlayEl) {
+    overlayEl.addEventListener('click', function() {
+        this.style.opacity = '0';
+        this.style.visibility = 'hidden';
+    });
+}
+
+// Това казва на браузъра: "Когато заредиш всичко, пусни навигацията"
+document.addEventListener("DOMContentLoaded", function() {
+    setupProjectPagination();
+});
+    </script>
+</body>
+</html>

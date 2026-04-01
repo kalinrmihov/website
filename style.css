@@ -1,0 +1,781 @@
+/* 1. Дефиниране на шрифта */
+@font-face {
+    font-family: 'Vercetti';
+    src: url('fonts/Vercetti-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 2. Основен стил */
+body {
+    font-family: 'Vercetti', sans-serif;
+    font-weight: normal;
+    font-size: 13px;
+    background-color: #fcfcfc;
+    color: #555555;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+    margin: 0;
+}
+body {
+    padding-top: 60px; /* Добавяме празно място отгоре, равно на височината на менюто */
+}
+
+/* 3. Хедър и Навигация */
+header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 40px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    
+    position: fixed; /* Променяме от sticky на fixed */
+    top: 0;
+    width: 100%; /* Трябва да е 100%, защото е fixed */
+    box-sizing: border-box; /* За да не излиза извън екрана заради падинга */
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    
+    /* Анимацията за плавно скриване/показване */
+    transition: transform 0.4s ease-in-out; 
+}
+
+/* Този клас ще се добавя автоматично, когато скролваме надолу */
+header.header--hidden {
+    transform: translateY(-100%); /* Избутва менюто нагоре извън екрана */
+}
+
+nav a {
+    font-family: 'Vercetti', sans-serif;
+    margin-left: 25px;
+    text-decoration: none;
+    color: #888;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: color 0.3s;
+    text-transform: lowercase;
+}
+
+nav a:hover {
+    color: #000;
+}
+
+/* 4. Заглавие */
+.main-title {
+    font-family: 'Space Mono', monospace;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 120px 0 140px 0;
+    padding: 0;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    font-weight: 150;
+    font-size: 27px;
+    color: #5a5a5a;
+}
+
+/* 5. Artist Statement */
+.intro-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+    margin: 60px auto;
+    max-width: 1100px;
+    padding: 0 20px;
+}
+
+.intro-image {
+    flex: 1.6;
+}
+
+.intro-image img {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    display: block;
+}
+
+.intro-text {
+    flex: 1;
+    text-align: justify;
+}
+
+.intro-text h2 {
+    font-family:'Space Mono', monospace;
+    text-transform: none;
+    letter-spacing: 2px;
+    font-size: 16px;
+    margin-top: 0;
+    border-bottom: 1px solid #464646;
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.intro-text p {
+    font-family: 'Vercetti', sans-serif;
+    font-size: 11px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.image-caption {
+    font-family: 'Vercetti', sans-serif;
+    font-style: italic;
+    font-size: 10px;
+    color: #666;
+    margin-top: 8px;
+    text-align: right;
+}
+
+/* 6. Контейнери и Общи настройки */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px; /* Връщаме падинга, за да не лепи в краищата на екрана */
+}
+
+/* Изчистване на стандартните отмествания на списъците */
+.container ul {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+/* Заглавията в секцията About */
+h3, .cv-category-title {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    color: #333;
+    /* По желание: добави border-bottom: 1px solid #eee; за повече структура */
+}
+
+/* Контейнерът на всеки ред в CV-то */
+.cv-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px; /* Разстояние между годината и текста */
+    margin-bottom: 12px;
+}
+
+/* Колоната за годината */
+.cv-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    min-width: 90px; /* Фиксирана ширина за перфектна колона */
+    color: #999;
+    padding-top: 3px; 
+    flex-shrink: 0;
+    text-align: left; 
+}
+
+/* Колоната за съдържанието */
+.cv-content {
+    font-family: 'Vercetti', sans-serif;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+    flex: 1;
+}
+
+/* Правим заглавията на изложбите (в em таг) малко по-изразителни */
+
+
+/* Мобилна версия */
+@media (max-width: 600px) {
+    .container {
+        padding: 0 20px; /* По-малко разстояние на телефон */
+    }
+    .cv-item {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .cv-year {
+        min-width: auto;
+    }
+}
+.download-links {
+    margin-top: 30px;       /* Разстояние под текста на биографията */
+    margin-bottom: 60px;    /* Разстояние преди началото на EDUCATION */
+    display: flex;
+    gap: 30px;              /* Разстояние между двата линка */
+    padding-top: 0;
+    border-top: none;       /* Махаме линията, тук тя не е нужна */
+}
+
+.download-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #888;            /* Елегантно сиво */
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+    color: #000;            /* Промяна на цвета на текста */
+    transform: translateY(-2px); /* Леко "отскачане" нагоре */
+}
+
+
+.download-btn .icon {
+    font-size: 14px;
+}
+
+/* 7. НОВАТА ГАЛЕРИЯ (в gallery.html) */
+.gallery-list {
+    margin-top: 40px;
+    padding-bottom: 100px;
+}
+
+.project-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* Увеличих го малко за повече въздух */
+    margin-bottom: 80px;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s ease;
+}
+
+.project-row:hover {
+    opacity: 0.7;
+}
+
+.project-image-container {
+    flex: 1.2; /* Снимката е малко по-голяма от текста */
+}
+
+.project-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.project-info {
+    flex: 1;
+}
+
+.project-info h3 {
+    font-family: 'Space Mono', monospace; /* Прилагаме новия шрифт и тук */
+    font-weight: 400;
+    font-size: 17px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #5a5a5a;
+}
+
+.project-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.project-excerpt {
+    font-family: 'Vercetti', sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: justify;
+    color: #666;
+}
+
+/* Основният контейнер става Flex */
+.project-container {
+    display: flex;
+    gap: 60px; /* Разстояние между снимките и текста */
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 100px 40px 100px 40px; /* Падинг отгоре заради менюто */
+    align-items: flex-start;
+}
+
+/* ЛЯВА КОЛОНА: СНИМКИ */
+.project-visuals {
+    flex: 1.3; /* Заема повече място */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.project-visuals img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ДЯСНА КОЛОНА: ТЕКСТ */
+.project-header {
+    flex: 0.8; /* По-тясна колона за текста */
+    position: relative;
+}
+
+/* Контейнерът вътре в дясната колона, който ще стои неподвижен */
+.sticky-wrapper {
+    position: sticky;
+    top: 60x; /* Спира на това разстояние от горния ръб при скрол */
+    height: fit-content;
+}
+
+.project-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.project-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.project-description {
+    font-family: 'Vercetti', sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
+    margin-bottom: 50px;
+}
+
+/* ФУТЪРЪТ ВЪТРЕ В ДЯСНАТА КОЛОНА */
+.project-footer {
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+}
+
+.back-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    text-decoration: none;
+    color: #333;
+}
+
+.copyright {
+    margin-top: 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: #ccc;
+}
+
+/* МОБИЛНА ВЕРСИЯ */
+@media (max-width: 1000px) {
+    .project-container {
+        flex-direction: column-reverse; /* На телефон първо е текста, после снимките */
+        padding-top: 100px;
+    }
+    .sticky-wrapper {
+        position: static;
+    }
+    .project-header {
+        width: 100%;
+    }
+}
+/*галерия снимки */
+/* --- INTEGRATED LIGHTBOX STYLES --- */
+
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999; /* Вдигаме го над менюто (което обикновено е 100-1000) */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.98);
+    justify-content: center;
+    align-items: center;
+    cursor: url('images/close-cursor.svg'), auto; 
+}
+
+/* Контейнер, който държи снимката и описанието заедно */
+.lightbox-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90%;
+    max-height: 92vh;
+}
+
+.lightbox-content {
+    max-width: 100%;
+    max-height: 85vh; /* Оставяме място за текста отдолу */
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    animation: zoomIn 0.3s ease-out;
+    cursor: default; /* Върху снимката мишката е нормална */
+}
+
+/* Текстът под снимката (от ALT атрибута) */
+.lightbox-caption {
+    margin-top: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+/* Броячът долу вляво */
+.lightbox-counter {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: #999;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.98); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Навигация: Стрелки */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 20px;
+    margin-top: -30px;
+    color: #333;
+    font-weight: 200;
+    font-size: 24px;
+    transition: 0.3s ease;
+    user-select: none;
+    z-index: 2100;
+}
+
+.prev { left: 30px; }
+.next { right: 30px; }
+
+.prev:hover, .next:hover {
+    color: #aaa;
+}
+
+/* Ефект върху снимките в основната страница */
+.project-visuals img {
+    cursor: pointer; 
+    transition: transform 0.4s ease;
+}
+
+.project-visuals img:hover {
+    transform: scale(1.01);
+}
+/* Lightbox mobile*/
+@media (max-width: 768px) {
+    /* 1. Правим контейнера база за позициониране */
+    .lightbox-wrapper {
+        position: relative; /* Важно, за да може стрелките да се "лепят" за него */
+    }
+
+    /* 2. Общи стилове за стрелките в мобилна версия */
+    .prev, .next {
+        top: 46% !important; /* Центрираме вертикално */
+        transform: translateY(-50%);
+        margin-top: 0 !important; /* Премахваме стария марджин */
+        
+        font-size: 18px !important; /* По-малки */
+        color: rgba(0, 0, 0, 0.2) !important; /* Много прозрачни (почти невидими) */
+        
+        padding: 40px 20px !important; /* Увеличена тъч зона за палеца */
+        background: none !important;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* 3. Раздалечаваме ги от центъра към краищата на снимката */
+    .prev {
+        left: 0px !important; /* Плътно вляво на lightbox-wrapper */
+    }
+
+    .next {
+        right: 0px !important; /* Плътно вдясно на lightbox-wrapper */
+    }
+
+    /* 4. Намаляваме и брояча, за да е в тон */
+    .lightbox-counter {
+        bottom: 20px !important;
+        left: 20px !important;
+        font-size: 10px !important;
+        opacity: 0.6;
+    }
+}
+/* --- PROJECT PAGINATION DESIGN --- */
+
+.project-pagination {
+    margin-top: 20px;
+    /* Намаляваме padding-bottom тук, защото футерът отдолу добавя останалото */
+    padding: 20px 0 40px 0; 
+    
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* Корекция: премахваме дублиращите се отстъпи */
+.project-footer, footer p {
+    margin-top: 0;
+    padding-bottom: 0; /* Зануляваме, за да не добавя празно пространство */
+}
+
+.pagination-item {
+    flex: 1;
+    display: flex;
+}
+
+.pagination-item.next-project {
+    justify-content: flex-end; /* Бута десния проект плътно вдясно */
+}
+
+.pagination-item a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #4c4c4c;
+    transition: opacity 0.3s ease;
+}
+
+.pagination-item a:hover {
+    opacity: 0.5;
+}
+
+.project-name {
+    font-family: 'Space Mono', monospace; 
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    margin: 0 20px;
+}
+
+.nav-arrow {
+    font-size: 24px;
+    font-weight: 200;
+    line-height: 1;
+    position: relative;
+    top: -1px;
+}
+
+/* Адаптивност за мобилни устройства (ЗАПАЗЕНА) */
+@media (max-width: 768px) {
+    .pagination-container {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 20px;
+    }
+    
+    .pagination-item.next-project {
+        justify-content: center;
+    }
+    
+    .pagination-item.prev-project {
+        justify-content: center;
+    }
+}
+
+.nav-footer-spacer {
+    height: 10px; /* Това е точно около 1 см разстояние */
+    width: 100%;
+    display: block;
+    background: transparent;
+}
+
+/*видео в началото на всеки проект*/
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* Полупрозрачен черен фон, за да се загатне страницата отдолу */
+    background-color: rgba(0, 0, 0, 0.8); 
+    backdrop-filter: blur(5px); /* Леко разфокусира съдържанието отдолу */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease; /* По-бързо и плавно за JavaScript-а */
+}
+
+.video-wrapper {
+    position: relative;
+    width: 70%; /* По-малко и по-елегантно */
+    max-width: 1100px;
+    /* Синематично съотношение 21:9 (ултра-широко) */
+     
+    box-shadow: 0 30px 100px rgba(0,0,0,0.5); /* Дълбочина */
+    
+}
+.video-wrapper2 {
+    position: relative;
+    width: 90%; /* По-малко и по-елегантно */
+    max-width: 1200px;
+    /* Синематично съотношение 21:9 (ултра-широко) */
+     
+    box-shadow: 0 30px 100px rgba(0,0,0,0.5); /* Дълбочина */
+    
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Реже видеото, за да запълни 21:9 прозореца */
+}
+
+.video-caption {
+    position: absolute;
+    bottom: -90px; /* По-далеч от видеото */
+    left: 0;
+    width: 100%;
+    text-align: left;
+    color: #fff;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.video-caption h1 {
+    font-family: 'Space Mono', monospace; 
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: none;
+    color: #cdcbcb; /* Класическо средно сиво */
+    /* color: rgba(255, 255, 255, 0.6); */ /* Алтернатива: Бяло с 60% прозрачност (изглежда много естествено) */
+    
+    opacity: 0.8; /* Допълнителен контрол над ефирността */
+    font-weight: 200;
+}
+
+.scroll-hint {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.5;
+    margin-top: 0px;
+    text-align: center;
+     /* Нежно мигане за подсказка */
+}
+
+@keyframes fadePulse {
+    0% { opacity: 0.2; }
+    50% { opacity: 0.6; }
+    100% { opacity: 0.2; }
+}
+
+/* Мобилна версия */
+@media (max-width: 768px) {
+    .video-wrapper {
+        width: 95%; /* Повече ширина на телефон */
+    }
+    .video-wrapper2 {
+        width: 70%; /* Повече ширина на телефон */
+    }
+    .video-caption h1 {
+        font-size: 11px;
+    }
+    .video-caption {
+        /* Увеличаваме отрицателната стойност, за да слезе текста ПО-НАДОЛУ */
+        bottom: -110px !important; 
+        
+        width: 90%;
+        left: 5%; /* Центрираме го ръчно, ако ширината е 90% */
+    }
+
+    .scroll-hint {
+        margin-top: 5px !important;
+        font-size: 16px !important;
+    }
+}
+/* 8. ФУТЪР (РЕДАКТИРАН ЗА ПРЕМАХВАНЕ НА ИВИЦАТА) */
+
+.site-footer {
+    width: 100%;
+    padding: 10px 0 40px 0; /* Голямо празно пространство отгоре за "дишане" */
+    background-color: #fff;
+    margin-top: 10px; /* Отдалечаваме го от съдържанието */
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; /* Малък и дискретен шрифт */
+    letter-spacing: 0.05em;
+    color: #999; /* Сивкав цвят, за да не "крещи" */
+}
+
+.instagram-link {
+    color: #333; /* Иконата е малко по-тъмна от текста */
+    transition: opacity 0.3s ease;
+    text-decoration: none;
+}
+
+.instagram-link:hover {
+    opacity: 0.5;
+}
+
+.email-text {
+    cursor: default; /* Показва, че не е линк за кликане */
+    user-select: all; /* Позволява лесно копиране на целия имейл с един клик */
+}
+
+/* На мобилен телефон ги оставяме центрирани едно под друго */
+
+/* 9. МОБИЛНА ВЕРСИЯ (ЗАПАЗЕНА ИНФОРМАЦИЯ) */
+@media (max-width: 768px) {
+    .intro-section, .project-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .main-title {
+        margin: 60px 0 80px 0;
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+.project-container, .container {
+padding-left: 20px !important;
+padding-right: 20px !important;
+width: 100% !important;
+box-sizing: border-box !important;
+}
+
+.project-visuals img, .project-images img {
+width: 100% !important;
+height: auto !important;
+margin-bottom: -10px !important;
+}
+
+p, .project-description {
+width: 100% !important;
+margin-left: 0 !important;
+margin-right: 0 !important;
+}
+}
