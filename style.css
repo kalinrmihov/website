@@ -690,7 +690,8 @@ video {
 /* Мобилна версия */
 @media (max-width: 768px) {
     .video-overlay {
-        align-items: center !important; 
+        align-items: center !important;
+        padding-bottom: 60px; 
     }
     .video-wrapper {
         width: 95%; /* Повече ширина на телефон */
