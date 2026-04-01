@@ -611,6 +611,7 @@ h3, .cv-category-title {
     left: 0;
     width: 100%;
     height: 100vh;
+    height: 100dvh;
     /* Полупрозрачен черен фон, за да се загатне страницата отдолу */
     background-color: rgba(0, 0, 0, 0.8); 
     backdrop-filter: blur(5px); /* Леко разфокусира съдържанието отдолу */
@@ -688,6 +689,9 @@ video {
 
 /* Мобилна версия */
 @media (max-width: 768px) {
+    .video-overlay {
+        align-items: center !important; 
+    }
     .video-wrapper {
         width: 95%; /* Повече ширина на телефон */
     }
@@ -699,7 +703,7 @@ video {
     }
     .video-caption {
         /* Увеличаваме отрицателната стойност, за да слезе текста ПО-НАДОЛУ */
-        bottom: -110px !important; 
+        bottom: -120px !important; 
         
         width: 90%;
         left: 5%; /* Центрираме го ръчно, ако ширината е 90% */
