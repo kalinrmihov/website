@@ -690,30 +690,9 @@ video {
 /* Мобилна версия */
 @media (max-width: 768px) {
     .video-overlay {
-        align-items: center !important;
-        padding-bottom: 60px; 
+       display: none !important;
     }
-    .video-wrapper {
-        width: 95%; /* Повече ширина на телефон */
-    }
-    .video-wrapper2 {
-        width: 70%; /* Повече ширина на телефон */
-    }
-    .video-caption h1 {
-        font-size: 11px;
-    }
-    .video-caption {
-        /* Увеличаваме отрицателната стойност, за да слезе текста ПО-НАДОЛУ */
-        bottom: -120px !important; 
-        
-        width: 90%;
-        left: 5%; /* Центрираме го ръчно, ако ширината е 90% */
-    }
-
-    .scroll-hint {
-        margin-top: 5px !important;
-        font-size: 16px !important;
-    }
+    
 }
 /* 8. ФУТЪР (РЕДАКТИРАН ЗА ПРЕМАХВАНЕ НА ИВИЦАТА) */
 
