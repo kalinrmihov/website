@@ -381,7 +381,7 @@ h3, .cv-category-title {
 @media (max-width: 1000px) {
     .project-container {
         flex-direction: column-reverse; /* На телефон първо е текста, после снимките */
-        padding-top: 100px;
+        padding-top: 40px;
     }
     .sticky-wrapper {
         position: static;
